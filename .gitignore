@@ -19,4 +19,5 @@ dokumentasjon/~$*
 edialog/node_modules
 edialog/src/main/webapp/bower_components
 edialog/.sass-cache
+.flattened-pom.xml
 svarut-itests/build
