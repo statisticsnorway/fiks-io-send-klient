@@ -1,1 +1,1 @@
-newLibPipeline()
+ciFriendlyLibBuild()
