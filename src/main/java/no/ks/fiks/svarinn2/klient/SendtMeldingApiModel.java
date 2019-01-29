@@ -16,5 +16,4 @@ public class SendtMeldingApiModel {
     @NonNull private Long ttl;
     private UUID dokumentlagerId;
     private UUID svarPaMelding;
-
 }
