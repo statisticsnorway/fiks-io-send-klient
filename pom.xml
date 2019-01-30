@@ -13,6 +13,8 @@
     <artifactId>svarinn2-send-klient</artifactId>
     <version>${revision}${changelist}</version>
 
+    <name>Svarinn2 send-klient</name>
+    <description>Klient for å sende meldinger til SvarInn</description>
     <url>https://github.com/ks-no/fiks-svarinn2</url>
 
     <scm>
