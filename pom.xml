@@ -1,88 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <groupId>no.ks.fiks.pom</groupId>
-        <artifactId>fiks-ekstern-super-pom</artifactId>
-        <version>0.0.3</version>
-    </parent>
-
-    <modelVersion>4.0.0</modelVersion>
-    <groupId>no.ks.fiks</groupId>
-    <artifactId>svarinn2-send-klient</artifactId>
-    <version>${revision}${changelist}</version>
-
-    <name>Svarinn2 send-klient</name>
-    <description>Klient for å sende meldinger til SvarInn</description>
-    <url>https://github.com/ks-no/fiks-svarinn2</url>
-
-    <scm>
-        <connection>scm:git:git@github.com:ks-no/fiks-svarinn2-send-klient.git</connection>
-        <developerConnection>scm:git:git@github.com:ks-no/fiks-svarinn2-send-klient.git</developerConnection>
-        <url>https://github.com/ks-no/fiks-svarinn2-send-klient</url>
-    </scm>
-
-    <properties>
-        <changelist>-SNAPSHOT</changelist>
-        <revision>1.0.0</revision>
-    </properties>
-
-    <dependencies>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.16.18</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.validation</groupId>
-            <artifactId>validation-api</artifactId>
-            <version>2.0.1.Final</version>
-        </dependency>
-        <dependency>
-            <groupId>io.vavr</groupId>
-            <artifactId>vavr</artifactId>
-            <version>0.10.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.eclipse.jetty</groupId>
-            <artifactId>jetty-client</artifactId>
-            <version>9.4.13.v20181111</version>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-core</artifactId>
-            <version>2.9.8</version>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>2.9.8</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-            <version>2.6</version>
-        </dependency>
-        <dependency>
-            <groupId>no.ks.fiks</groupId>
-            <artifactId>maskinporten-client</artifactId>
-            <version>1.0.8</version>
-        </dependency>
-    </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.0</version>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
-
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>no.ks.fiks.pom</groupId>
+    <artifactId>fiks-ekstern-super-pom</artifactId>
+    <version>0.0.3</version>
+  </parent>
+  <groupId>no.ks.fiks</groupId>
+  <artifactId>svarinn2-send-klient</artifactId>
+  <version>${revision}${changelist}</version>
+  <name>Svarinn2 send-klient</name>
+  <description>Klient for å sende meldinger til SvarInn</description>
+  <url>https://github.com/ks-no/fiks-svarinn2</url>
+  <scm>
+    <connection>scm:git:git@github.com:ks-no/fiks-svarinn2-send-klient.git</connection>
+    <developerConnection>scm:git:git@github.com:ks-no/fiks-svarinn2-send-klient.git</developerConnection>
+    <url>https://github.com/ks-no/fiks-svarinn2-send-klient</url>
+  </scm>
+  <properties>
+    <revision>1.0.1</revision>
+    <changelist>-SNAPSHOT</changelist>
+  </properties>
+  <dependencies>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.16.18</version>
+    </dependency>
+    <dependency>
+      <groupId>javax.validation</groupId>
+      <artifactId>validation-api</artifactId>
+      <version>2.0.1.Final</version>
+    </dependency>
+    <dependency>
+      <groupId>io.vavr</groupId>
+      <artifactId>vavr</artifactId>
+      <version>0.10.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.jetty</groupId>
+      <artifactId>jetty-client</artifactId>
+      <version>9.4.13.v20181111</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-core</artifactId>
+      <version>2.9.8</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.9.8</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>2.6</version>
+    </dependency>
+    <dependency>
+      <groupId>no.ks.fiks</groupId>
+      <artifactId>maskinporten-client</artifactId>
+      <version>1.0.8</version>
+    </dependency>
+  </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.0</version>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 </project>
