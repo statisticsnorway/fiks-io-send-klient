@@ -1,1 +1,1 @@
-newCiFriendlyLibBuild()
+ciFriendlyLibBuild()
