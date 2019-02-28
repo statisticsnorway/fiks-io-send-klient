@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.vavr.control.Option;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
+import no.ks.fiks.commons.authorization.Headers;
 import org.apache.commons.io.IOUtils;
 import org.eclipse.jetty.client.HttpClient;
 import org.eclipse.jetty.client.api.Request;
@@ -23,6 +24,7 @@ import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
+import java.util.function.Supplier;
 
 import static org.eclipse.jetty.http.HttpStatus.isClientError;
 import static org.eclipse.jetty.http.HttpStatus.isServerError;
@@ -35,15 +37,17 @@ public class SvarInnUtsendingKlient {
     private final String svarInnHost;
     private final Integer svarInnPort;
     private final AuthenticationStrategy authenticationStrategy;
+    private Supplier<String> requestIdSupplier;
 
     private final ObjectMapper objectMapper = new ObjectMapper();
     private static final String BASE_PATH = "/svarinn2/api/v1/";
 
-    public SvarInnUtsendingKlient(String svarInnScheme, String svarInnHost, Integer svarInnPort, @NonNull AuthenticationStrategy authenticationStrategy) {
+    public SvarInnUtsendingKlient(@NonNull String svarInnScheme, @NonNull String svarInnHost, @NonNull Integer svarInnPort, @NonNull AuthenticationStrategy authenticationStrategy, @NonNull Supplier<String> requestIdSupplier) {
         this.svarInnScheme = svarInnScheme;
         this.svarInnHost = svarInnHost;
         this.svarInnPort = svarInnPort;
         this.authenticationStrategy = authenticationStrategy;
+        this.requestIdSupplier = requestIdSupplier;
 
         try {
             this.client.start();
@@ -68,6 +72,12 @@ public class SvarInnUtsendingKlient {
                 .content(contentProvider);
 
         authenticationStrategy.setAuthenticationHeaders(request);
+
+
+        String requestId = requestIdSupplier.get();
+
+        if (requestId != null)
+            request.header(Headers.REQUEST_ID, requestId);
 
         request.send(listener);
 
