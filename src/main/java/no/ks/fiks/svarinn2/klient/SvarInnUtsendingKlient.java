@@ -57,6 +57,10 @@ public class SvarInnUtsendingKlient {
         }
     }
 
+    public SvarInnUtsendingKlient(@NonNull String svarInnScheme, @NonNull String svarInnHost, @NonNull Integer svarInnPort, @NonNull AuthenticationStrategy authenticationStrategy) {
+        this(svarInnScheme, svarInnHost, svarInnPort, authenticationStrategy, r -> r);
+    }
+
     public SendtMeldingApiModel send(@NonNull MeldingSpesifikasjonApiModel metadata, @NonNull Option<InputStream> data) {
         MultiPartContentProvider contentProvider = new MultiPartContentProvider();
         contentProvider.addFieldPart("metadata", new StringContentProvider("application/json", serialiser(metadata), Charset.forName("UTF-8")), null);
