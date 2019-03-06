@@ -24,6 +24,7 @@ import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 import static org.eclipse.jetty.http.HttpStatus.isClientError;
@@ -37,17 +38,17 @@ public class SvarInnUtsendingKlient {
     private final String svarInnHost;
     private final Integer svarInnPort;
     private final AuthenticationStrategy authenticationStrategy;
-    private Supplier<String> requestIdSupplier;
+    private Function<Request, Request> requestInterceptor;
 
     private final ObjectMapper objectMapper = new ObjectMapper();
     private static final String BASE_PATH = "/svarinn2/api/v1/";
 
-    public SvarInnUtsendingKlient(@NonNull String svarInnScheme, @NonNull String svarInnHost, @NonNull Integer svarInnPort, @NonNull AuthenticationStrategy authenticationStrategy, @NonNull Supplier<String> requestIdSupplier) {
+    public SvarInnUtsendingKlient(@NonNull String svarInnScheme, @NonNull String svarInnHost, @NonNull Integer svarInnPort, @NonNull AuthenticationStrategy authenticationStrategy, @NonNull Function<Request, Request> requestInterceptor) {
         this.svarInnScheme = svarInnScheme;
         this.svarInnHost = svarInnHost;
         this.svarInnPort = svarInnPort;
         this.authenticationStrategy = authenticationStrategy;
-        this.requestIdSupplier = requestIdSupplier;
+        this.requestInterceptor = requestInterceptor;
 
         try {
             this.client.start();
@@ -73,13 +74,7 @@ public class SvarInnUtsendingKlient {
 
         authenticationStrategy.setAuthenticationHeaders(request);
 
-
-        String requestId = requestIdSupplier.get();
-
-        if (requestId != null)
-            request.header(Headers.REQUEST_ID, requestId);
-
-        request.send(listener);
+        requestInterceptor.apply(request).send(listener);
 
         try {
             Response response = listener.get(1, TimeUnit.HOURS);
