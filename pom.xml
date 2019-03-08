@@ -19,7 +19,7 @@
     <url>https://github.com/ks-no/fiks-svarinn2-send-klient</url>
   </scm>
   <properties>
-    <revision>1.0.4</revision>
+    <revision>1.0.5</revision>
     <changelist>-SNAPSHOT</changelist>
   </properties>
   <dependencies>
