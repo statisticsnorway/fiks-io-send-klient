@@ -1,4 +1,4 @@
-package no.ks.fiks.svarinn2.klient;
+package no.ks.fiks.io.klient;
 
 import lombok.Builder;
 import lombok.Data;

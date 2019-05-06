@@ -1,4 +1,4 @@
-package no.ks.fiks.svarinn2.klient;
+package no.ks.fiks.io.klient;
 
 import no.ks.fiks.maskinporten.Maskinportenklient;
 import org.eclipse.jetty.client.api.Request;

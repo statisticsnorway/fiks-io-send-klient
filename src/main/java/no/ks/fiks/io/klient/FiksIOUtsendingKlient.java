@@ -1,4 +1,4 @@
-package no.ks.fiks.svarinn2.klient;
+package no.ks.fiks.io.klient;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -29,7 +29,7 @@ import static org.eclipse.jetty.http.HttpStatus.isClientError;
 import static org.eclipse.jetty.http.HttpStatus.isServerError;
 
 @Slf4j
-public class SvarInnUtsendingKlient {
+public class FiksIOUtsendingKlient {
 
     private final HttpClient client = new HttpClient();
     private final String svarInnScheme;
@@ -39,9 +39,9 @@ public class SvarInnUtsendingKlient {
     private Function<Request, Request> requestInterceptor;
 
     private final ObjectMapper objectMapper = new ObjectMapper();
-    private static final String BASE_PATH = "/svarinn2/api/v1/";
+    private static final String BASE_PATH = "/io/api/v1/";
 
-    public SvarInnUtsendingKlient(@NonNull String svarInnScheme, @NonNull String svarInnHost, @NonNull Integer svarInnPort, @NonNull AuthenticationStrategy authenticationStrategy, @NonNull Function<Request, Request> requestInterceptor) {
+    public FiksIOUtsendingKlient(@NonNull String svarInnScheme, @NonNull String svarInnHost, @NonNull Integer svarInnPort, @NonNull AuthenticationStrategy authenticationStrategy, @NonNull Function<Request, Request> requestInterceptor) {
         this.svarInnScheme = svarInnScheme;
         this.svarInnHost = svarInnHost;
         this.svarInnPort = svarInnPort;
@@ -55,7 +55,7 @@ public class SvarInnUtsendingKlient {
         }
     }
 
-    public SvarInnUtsendingKlient(@NonNull String svarInnScheme, @NonNull String svarInnHost, @NonNull Integer svarInnPort, @NonNull AuthenticationStrategy authenticationStrategy) {
+    public FiksIOUtsendingKlient(@NonNull String svarInnScheme, @NonNull String svarInnHost, @NonNull Integer svarInnPort, @NonNull AuthenticationStrategy authenticationStrategy) {
         this(svarInnScheme, svarInnHost, svarInnPort, authenticationStrategy, r -> r);
     }
 
@@ -83,7 +83,7 @@ public class SvarInnUtsendingKlient {
             if (isClientError(response.getStatus()) || isServerError(response.getStatus())) {
                 int status = response.getStatus();
                 String content = IOUtils.toString(listener.getInputStream(), StandardCharsets.UTF_8);
-                throw new SvarInnHttpException(String.format("HTTP-feil under sending av melding (%d): %s", status, content), status, content);
+                throw new FiksIOHttpException(String.format("HTTP-feil under sending av melding (%d): %s", status, content), status, content);
             }
             return objectMapper.readValue(listener.getInputStream(), SendtMeldingApiModel.class);
         } catch (InterruptedException | TimeoutException | ExecutionException | IOException e) {
