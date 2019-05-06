@@ -1,11 +1,11 @@
-package no.ks.fiks.svarinn2.klient;
+package no.ks.fiks.io.klient;
 
-public class SvarInnHttpException extends RuntimeException {
+public class FiksIOHttpException extends RuntimeException {
 
     private final int status;
     private final String response;
 
-    SvarInnHttpException(String message, int status, String response) {
+    FiksIOHttpException(String message, int status, String response) {
         super(message);
         this.status = status;
         this.response = response;
