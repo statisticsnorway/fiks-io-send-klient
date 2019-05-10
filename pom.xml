@@ -23,8 +23,9 @@
     <vavr.version>0.10.0</vavr.version>
     <lombok.version>1.16.18</lombok.version>
     <validation-api.version>2.0.1.Final</validation-api.version>
-    <commons-io.version>2.6</commons-io.version>
+    <revision>1.1.1</revision>
     <changelist>-SNAPSHOT</changelist>
+    <commons-io.version>2.6</commons-io.version>
     <logback-classic.version>1.2.3</logback-classic.version>
     <revision>1.1.1</revision>
     <jackson.version>2.9.8</jackson.version>
@@ -115,7 +116,6 @@
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.8.0</version>
         <configuration>
           <source>1.8</source>
           <target>1.8</target>
