@@ -10,6 +10,7 @@ import java.util.UUID;
 @Builder
 public class SendtMeldingApiModel {
     @NonNull private UUID meldingId;
+    @NonNull private String meldingType;
     @NonNull private UUID avsenderKontoId;
     @NonNull private UUID mottakerKontoId;
     @NonNull private Long ttl;
