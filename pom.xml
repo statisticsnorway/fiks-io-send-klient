@@ -27,7 +27,7 @@
     <changelist>-SNAPSHOT</changelist>
     <logback-classic.version>1.2.3</logback-classic.version>
     <revision>1.2.1</revision>
-    <jackson.version>2.9.8</jackson.version>
+    <jackson.version>2.9.9</jackson.version>
     <jetty-client.version>9.4.18.v20190429</jetty-client.version>
     <mockito.version>2.24.5</mockito.version>
     <junit-platform-commons.version>1.4.2</junit-platform-commons.version>
