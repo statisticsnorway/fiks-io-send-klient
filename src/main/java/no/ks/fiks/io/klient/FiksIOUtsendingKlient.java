@@ -13,6 +13,7 @@ import org.eclipse.jetty.client.util.InputStreamResponseListener;
 import org.eclipse.jetty.client.util.MultiPartContentProvider;
 import org.eclipse.jetty.client.util.StringContentProvider;
 
+import java.io.Closeable;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
@@ -27,7 +28,7 @@ import static org.eclipse.jetty.http.HttpStatus.isClientError;
 import static org.eclipse.jetty.http.HttpStatus.isServerError;
 
 @Slf4j
-public class FiksIOUtsendingKlient {
+public class FiksIOUtsendingKlient implements Closeable {
 
     private final RequestFactory requestFactory;
     private final AuthenticationStrategy authenticationStrategy;
@@ -83,5 +84,10 @@ public class FiksIOUtsendingKlient {
         } catch (JsonProcessingException e) {
             throw new RuntimeException("Feil under serialisering av metadata", e);
         }
+    }
+
+    @Override
+    public void close() throws IOException {
+        requestFactory.close();
     }
 }

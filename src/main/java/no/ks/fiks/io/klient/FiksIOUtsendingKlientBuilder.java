@@ -76,7 +76,6 @@ public class FiksIOUtsendingKlientBuilder {
 
     private RequestFactory createRequestFactory() {
         return RequestFactoryImpl.builder()
-                                 .client(getOrCreateHttpClient())
                                  .scheme(scheme)
                                  .hostName(hostName)
                                  .portNumber(portNumber)
@@ -89,19 +88,5 @@ public class FiksIOUtsendingKlientBuilder {
 
     private ObjectMapper getOrCreateObjectMapper() {
         return objectMapper == null ? new ObjectMapper().findAndRegisterModules() : objectMapper;
-    }
-
-    private HttpClient getOrCreateHttpClient() {
-        final HttpClient internalClient = httpClient == null ? new HttpClient(new SslContextFactory.Client()) : httpClient;
-        if(! internalClient.isStarted()) {
-            log.debug("Starting http client");
-            try {
-                internalClient.start();
-            } catch (Exception e) {
-                log.warn("Feil under oppstart av Jetty HttpClient", e);
-                throw new IllegalStateException("Kunne ikke starte http client", e);
-            }
-        }
-        return internalClient;
     }
 }
