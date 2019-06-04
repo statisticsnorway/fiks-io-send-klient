@@ -5,6 +5,7 @@ import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.jetty.client.HttpClient;
 import org.eclipse.jetty.client.api.Request;
+import org.eclipse.jetty.util.ssl.SslContextFactory;
 
 import java.util.function.Function;
 
@@ -91,7 +92,7 @@ public class FiksIOUtsendingKlientBuilder {
     }
 
     private HttpClient getOrCreateHttpClient() {
-        final HttpClient internalClient = httpClient == null ? new HttpClient() : httpClient;
+        final HttpClient internalClient = httpClient == null ? new HttpClient(new SslContextFactory.Client()) : httpClient;
         if(! internalClient.isStarted()) {
             log.debug("Starting http client");
             try {
