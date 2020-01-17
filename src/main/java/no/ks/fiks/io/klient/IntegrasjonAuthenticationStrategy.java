@@ -30,6 +30,6 @@ public class IntegrasjonAuthenticationStrategy implements AuthenticationStrategy
     }
 
     private String getAccessToken() {
-        return maskinportenklient.getAccessToken("ks");
+        return maskinportenklient.getAccessToken("ks:fiks");
     }
 }
