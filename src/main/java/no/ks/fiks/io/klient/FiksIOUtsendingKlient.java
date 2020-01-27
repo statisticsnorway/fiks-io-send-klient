@@ -51,31 +51,32 @@ public class FiksIOUtsendingKlient implements Closeable {
     }
 
     public SendtMeldingApiModel send(@NonNull MeldingSpesifikasjonApiModel metadata, @NonNull Option<InputStream> data) {
-        MultiPartContentProvider contentProvider = new MultiPartContentProvider();
-        contentProvider.addFieldPart("metadata", new StringContentProvider("application/json", serialiser(metadata), Charset.forName("UTF-8")), null);
-        if (data.isDefined())
-            contentProvider.addFilePart("data", UUID.randomUUID().toString(), new InputStreamContentProvider(data.get()), null);
+        try (MultiPartContentProvider contentProvider = new MultiPartContentProvider()) {
+            contentProvider.addFieldPart("metadata", new StringContentProvider("application/json", serialiser(metadata), Charset.forName("UTF-8")), null);
+            if (data.isDefined())
+                contentProvider.addFilePart("data", UUID.randomUUID().toString(), new InputStreamContentProvider(data.get()), null);
 
-        contentProvider.close();
 
-        InputStreamResponseListener listener = new InputStreamResponseListener();
-        final Request request = requestFactory.createSendToFiksIORequest(contentProvider);
+            InputStreamResponseListener listener = new InputStreamResponseListener();
+            final Request request = requestFactory.createSendToFiksIORequest(contentProvider);
 
-        authenticationStrategy.setAuthenticationHeaders(request);
+            authenticationStrategy.setAuthenticationHeaders(request);
 
-        requestInterceptor.apply(request).send(listener);
+            requestInterceptor.apply(request).send(listener);
 
-        try {
-            Response response = listener.get(1, TimeUnit.HOURS);
-            if (isClientError(response.getStatus()) || isServerError(response.getStatus())) {
-                int status = response.getStatus();
-                String content = IOUtils.toString(listener.getInputStream(), StandardCharsets.UTF_8);
-                throw new FiksIOHttpException(String.format("HTTP-feil under sending av melding (%d): %s", status, content), status, content);
+            try {
+                Response response = listener.get(1, TimeUnit.HOURS);
+                if (isClientError(response.getStatus()) || isServerError(response.getStatus())) {
+                    int status = response.getStatus();
+                    String content = IOUtils.toString(listener.getInputStream(), StandardCharsets.UTF_8);
+                    throw new FiksIOHttpException(String.format("HTTP-feil under sending av melding (%d): %s", status, content), status, content);
+                }
+                return objectMapper.readValue(listener.getInputStream(), SendtMeldingApiModel.class);
+            } catch (InterruptedException | TimeoutException | ExecutionException | IOException e) {
+                throw new RuntimeException("Feil under invokering av FIKS IO api", e);
             }
-            return objectMapper.readValue(listener.getInputStream(), SendtMeldingApiModel.class);
-        } catch (InterruptedException | TimeoutException | ExecutionException | IOException e) {
-            throw new RuntimeException("Feil under invokering av FIKS IO api", e);
         }
+
     }
 
     private String serialiser(@NonNull Object metadata) {
