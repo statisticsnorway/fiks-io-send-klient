@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
 
+import java.util.Map;
 import java.util.UUID;
 
 @Data
@@ -16,4 +17,5 @@ public class SendtMeldingApiModel {
     @NonNull private Long ttl;
     private UUID dokumentlagerId;
     private UUID svarPaMelding;
+    @NonNull private Map<String, String> headere;
 }
