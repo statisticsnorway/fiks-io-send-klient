@@ -258,6 +258,9 @@
         <plugin>
           <artifactId>maven-javadoc-plugin</artifactId>
           <version>3.1.1</version>
+          <configuration>
+            <source>8</source>
+          </configuration>
           <executions>
             <execution>
               <id>attach-javadocs</id>
@@ -410,6 +413,9 @@
       <plugin>
         <artifactId>maven-javadoc-plugin</artifactId>
         <version>3.1.1</version>
+        <configuration>
+          <source>8</source>
+        </configuration>
         <executions>
           <execution>
             <id>attach-javadocs</id>

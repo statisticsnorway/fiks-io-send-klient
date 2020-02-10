@@ -17,5 +17,5 @@ public class SendtMeldingApiModel {
     @NonNull private Long ttl;
     private UUID dokumentlagerId;
     private UUID svarPaMelding;
-    @NonNull private Map<String, String> headere;
+    private Map<String, String> headere;
 }
