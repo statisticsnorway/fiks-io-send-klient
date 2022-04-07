@@ -5,7 +5,7 @@
   <parent>
     <groupId>no.ks.fiks.pom</groupId>
     <artifactId>fiks-ekstern-super-pom</artifactId>
-    <version>1.0.8</version>
+    <version>1.0.9</version>
   </parent>
   <groupId>no.ks.fiks</groupId>
   <artifactId>fiks-io-send-klient</artifactId>
@@ -32,7 +32,6 @@
     <logback-classic.version>1.2.11</logback-classic.version>
     <commons-io.version>2.11.0</commons-io.version>
     <maskinporten-client.version>2.0.5</maskinporten-client.version>
-    <maven-surefire-plugin.version>3.0.0-M6</maven-surefire-plugin.version>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -122,9 +121,7 @@
         <artifactId>maven-compiler-plugin</artifactId>
       </plugin>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>${maven-surefire-plugin.version}</version>
       </plugin>
     </plugins>
   </build>
