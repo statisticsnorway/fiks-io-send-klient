@@ -9,7 +9,7 @@
         <version>1.0.19</version>
     </parent>
     <groupId>no.ssb.barn</groupId>
-    <artifactId>fiks-io-send-klient</artifactId>
+    <artifactId>fiks-io-send-klient-2</artifactId>
     <version>${revision}</version>
     <name>FIKS IO send-klient</name>
     <description>Klient for å sende meldinger til FIKS IO</description>
